@@ -16,16 +16,19 @@ int main(){
     Mat org1 = imread("../dataset/raw-890/"+image_name);
     Mat ref1 = imread("../dataset/reference-890/"+image_name);
     Mat org,ref;
-    if(org1.rows>500){
-        resize(org1,org,Size(500,500),0,0);
-        resize(ref1,ref,Size(500,500),0,0);
+    if(org1.rows>32){
+        resize(org1,org,Size(32,32),0,0);
+        resize(ref1,ref,Size(32,32),0,0);
     }
     else{
         org = org1;
         ref = ref1;
     }
+    Mat enhanced;
     auto start = chrono::high_resolution_clock::now();
-    Mat enhanced = enhance(org);
+    enhanced = enhance(org);
+    // for(int i=0;i<2000;i++)
+    // enhanced = enhance(org);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
     cout<<"time taken = "<<duration.count()<<"ms"<<endl;
